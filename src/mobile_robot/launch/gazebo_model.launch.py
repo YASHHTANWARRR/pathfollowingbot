@@ -17,11 +17,17 @@ def generate_launch_description():
 
     # relative path of the xacro file
     modelFileRelativePath = 'model/robot.xacro'
+    worldFileRelativePath = 'worlds/track.world'
 
     # absolute path of the model
     pathModelFile = os.path.join(
         get_package_share_directory(namePackage),
         modelFileRelativePath
+    )
+
+    pathWorldFile = os.path.join(
+        get_package_share_directory(namePackage),
+        worldFileRelativePath
     )
 
     # get robot description
@@ -36,11 +42,11 @@ def generate_launch_description():
         )
     )
 
-    # start Gazebo with empty world
+    # start Gazebo with the path-planning track world
     gazeboLaunch = IncludeLaunchDescription(
         gazebo_rosPackageLaunch,
         launch_arguments={
-            'gz_args': '-r -v 4 empty.sdf',
+            'gz_args': f'-r -v 4 {pathWorldFile}',
             'on_exit_shutdown': 'true'
         }.items()
     )
@@ -52,8 +58,8 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-name', robotXacroName,
-            '-x', '0',
-            '-y', '0',
+            '-x', '-7.0',
+            '-y', '-4.0',
             '-z', '0.5'
         ],
         output='screen',
@@ -72,22 +78,16 @@ def generate_launch_description():
 
     # bridge parameters file
     params_file = os.path.join(
-    get_package_share_directory('mobile_robot'),
-    'parameters',
-    'bridge_params.yaml'
+        get_package_share_directory('mobile_robot'),
+        'parameters',
+        'bridge_parameters.yaml'
     )   
 
     # Gazebo ↔ ROS bridge
     start_gazebo_ros_bridge_cmd = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        parameters=[
-            os.path.join(
-                get_package_share_directory('mobile_robot'),
-                'parameters',
-                'bridge_params.yaml'
-            )
-        ],
+        parameters=[params_file],
         output='screen',
     )
 

@@ -1,1 +1,1 @@
-/home/hornet/autonomous-vehicle-/src/mobile_robot/model/.venv/bin/Activate.ps1
+/home/hornet/Desktop/pathfollowingbot/src/mobile_robot/model/.venv/bin/Activate.ps1

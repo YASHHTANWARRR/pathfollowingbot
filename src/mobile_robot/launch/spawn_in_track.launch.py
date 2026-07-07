@@ -3,14 +3,13 @@ from launch_ros.actions import Node
 from launch.actions import ExecuteProcess
 from launch.substitutions import Command
 from launch_ros.parameter_descriptions import ParameterValue
+from ament_index_python.packages import get_package_share_directory
 import os
 
 
 def generate_launch_description():
 
-    pkg_path = os.path.expanduser(
-        '~/autonomous-vehicle-/src/mobile_robot'
-    )
+    pkg_path = get_package_share_directory('mobile_robot')
 
     xacro_file = os.path.join(pkg_path, 'model', 'robot.xacro')
 
@@ -33,9 +32,10 @@ def generate_launch_description():
                 'ros2', 'run', 'ros_gz_sim', 'create',
                 '-topic', 'robot_description',
                 '-name', 'my_robot',
-                '-x', '0',
-                '-y', '0',
-                '-z', '0.2'
+                '-x', '-7.0',
+                '-y', '-4.0',
+                '-z', '0.5',
+                '-Y', '0.0'
             ],
             output='screen'
         )

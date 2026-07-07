@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hornet/autonomous-vehicle-/src/mobile_robot
+CMAKE_SOURCE_DIR = /home/hornet/Desktop/pathfollowingbot/src/mobile_robot
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hornet/autonomous-vehicle-/build/mobile_robot
+CMAKE_BINARY_DIR = /home/hornet/Desktop/pathfollowingbot/build/mobile_robot
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/hornet/autonomous-vehicle-/build/mobile_robot && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/hornet/autonomous-vehicle-/src/mobile_robot /home/hornet/autonomous-vehicle-/src/mobile_robot /home/hornet/autonomous-vehicle-/build/mobile_robot /home/hornet/autonomous-vehicle-/build/mobile_robot /home/hornet/autonomous-vehicle-/build/mobile_robot/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/hornet/Desktop/pathfollowingbot/build/mobile_robot && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/hornet/Desktop/pathfollowingbot/src/mobile_robot /home/hornet/Desktop/pathfollowingbot/src/mobile_robot /home/hornet/Desktop/pathfollowingbot/build/mobile_robot /home/hornet/Desktop/pathfollowingbot/build/mobile_robot /home/hornet/Desktop/pathfollowingbot/build/mobile_robot/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 

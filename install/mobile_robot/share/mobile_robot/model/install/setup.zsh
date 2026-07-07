@@ -1,1 +1,1 @@
-/home/hornet/autonomous-vehicle-/src/mobile_robot/model/install/setup.zsh
+/home/hornet/Desktop/pathfollowingbot/src/mobile_robot/model/install/setup.zsh
