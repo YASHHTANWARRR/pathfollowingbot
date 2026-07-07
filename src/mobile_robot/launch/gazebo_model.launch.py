@@ -112,6 +112,6 @@ def generate_launch_description():
     )
 
     LaunchDescriptionObject.add_action(nodeRobotStatePublisher)
-    # LaunchDescriptionObject.add_action(start_gazebo_ros_bridge_cmd)
+    LaunchDescriptionObject.add_action(start_gazebo_ros_bridge_cmd)
 
     return LaunchDescriptionObject
