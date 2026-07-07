@@ -10,7 +10,7 @@ import xacro
 def generate_launch_description():
 
     # name of the robot defined in the Xacro file
-    robotXacroName = 'castor_robot'
+    robotXacroName = 'robo_robot'
 
     # name of the package
     namePackage = 'mobile_robot'

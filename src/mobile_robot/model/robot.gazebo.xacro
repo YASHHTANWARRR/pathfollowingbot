@@ -88,7 +88,7 @@
     <sensor name="gpu_lidar" type="gpu_lidar">
         <!-- <ray>
             <collision>
-                <ignore_entity>castor_robot</ignore_entity>
+                <ignore_entity>robo_robot</ignore_entity>
             </collision>
         </ray> -->
         
