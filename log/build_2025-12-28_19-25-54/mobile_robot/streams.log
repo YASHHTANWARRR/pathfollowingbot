@@ -1,0 +1,42 @@
+[0.005s] Invoking command in '/home/hornet/autonomous-vehicle-/build/mobile_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/hornet/autonomous-vehicle-/src/mobile_robot -DCMAKE_INSTALL_PREFIX=/home/hornet/autonomous-vehicle-/install/mobile_robot
+[0.127s] -- The C compiler identification is GNU 13.3.0
+[0.202s] -- The CXX compiler identification is GNU 13.3.0
+[0.219s] -- Detecting C compiler ABI info
+[0.290s] -- Detecting C compiler ABI info - done
+[0.300s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.300s] -- Detecting C compile features
+[0.301s] -- Detecting C compile features - done
+[0.308s] -- Detecting CXX compiler ABI info
+[0.378s] -- Detecting CXX compiler ABI info - done
+[0.384s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.385s] -- Detecting CXX compile features
+[0.385s] -- Detecting CXX compile features - done
+[0.389s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.494s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.578s] -- Found ament_lint_auto: 0.17.3 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[0.649s] -- Added test 'lint_cmake' to check CMake code style
+[0.650s] -- Added test 'xmllint' to check XML markup files
+[0.652s] -- Configuring done (0.6s)
+[0.653s] -- Generating done (0.0s)
+[0.654s] -- Build files have been written to: /home/hornet/autonomous-vehicle-/build/mobile_robot
+[0.658s] Invoked command in '/home/hornet/autonomous-vehicle-/build/mobile_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/hornet/autonomous-vehicle-/src/mobile_robot -DCMAKE_INSTALL_PREFIX=/home/hornet/autonomous-vehicle-/install/mobile_robot
+[0.658s] Invoking command in '/home/hornet/autonomous-vehicle-/build/mobile_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/hornet/autonomous-vehicle-/build/mobile_robot -- -j16 -l16
+[0.688s] Invoked command in '/home/hornet/autonomous-vehicle-/build/mobile_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/hornet/autonomous-vehicle-/build/mobile_robot -- -j16 -l16
+[0.694s] Invoking command in '/home/hornet/autonomous-vehicle-/build/mobile_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/hornet/autonomous-vehicle-/build/mobile_robot
+[0.699s] -- Install configuration: ""
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/ament_index/resource_index/package_run_dependencies/mobile_robot
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/ament_index/resource_index/parent_prefix_path/mobile_robot
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/environment/ament_prefix_path.sh
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/environment/ament_prefix_path.dsv
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/environment/path.sh
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/environment/path.dsv
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/local_setup.bash
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/local_setup.sh
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/local_setup.zsh
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/local_setup.dsv
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/package.dsv
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/ament_index/resource_index/packages/mobile_robot
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/cmake/mobile_robotConfig.cmake
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/cmake/mobile_robotConfig-version.cmake
+[0.699s] -- Installing: /home/hornet/autonomous-vehicle-/install/mobile_robot/share/mobile_robot/package.xml
+[0.700s] Invoked command in '/home/hornet/autonomous-vehicle-/build/mobile_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/hornet/autonomous-vehicle-/build/mobile_robot

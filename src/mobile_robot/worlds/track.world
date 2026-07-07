@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+<world name="track_world">
+
+    <include>
+        <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+    </include>
+
+    <include>
+        <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+
+    <include>
+        <uri>model://track_walls</uri>
+    </include>
+
+        <!-- Required for sensors -->
+        <plugin
+        filename="libgz-sim-sensors-system.so"
+        name="gz::sim::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+        </plugin>
+
+        <!-- REQUIRED for ros_gz_sim create -->
+        <plugin
+        filename="libgz-sim-user-commands-system.so"
+        name="gz::sim::systems::UserCommands"/>
+
+    </world>
+</sdf>

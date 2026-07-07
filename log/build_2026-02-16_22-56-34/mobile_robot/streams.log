@@ -1,0 +1,21 @@
+[0.006s] Invoking command in '/home/hornet/autonomous-vehicle-/build/mobile_robot': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/hornet/autonomous-vehicle-/build/mobile_robot -- -j16 -l16
+[0.068s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[3.529s] Traceback (most recent call last):
+[3.529s]   File "/opt/ros/jazzy/share/ament_cmake_core/cmake/package_templates/templates_2_cmake.py", line 21, in <module>
+[3.529s]     from ament_package.templates import get_environment_hook_template_path
+[3.529s] ModuleNotFoundError: No module named 'ament_package'
+[3.552s] [31mCMake Error at /opt/ros/jazzy/share/ament_cmake_core/cmake/ament_cmake_package_templates-extras.cmake:41 (message):
+[3.552s]   execute_process(/usr/bin/python3
+[3.552s]   /opt/ros/jazzy/share/ament_cmake_core/cmake/package_templates/templates_2_cmake.py
+[3.552s]   /home/hornet/autonomous-vehicle-/build/mobile_robot/ament_cmake_package_templates/templates.cmake)
+[3.552s]   returned error code 1
+[3.552s] Call Stack (most recent call first):
+[3.552s]   /opt/ros/jazzy/share/ament_cmake_core/cmake/ament_cmake_coreConfig.cmake:41 (include)
+[3.552s]   /opt/ros/jazzy/share/ament_cmake/cmake/ament_cmake_export_dependencies-extras.cmake:15 (find_package)
+[3.552s]   /opt/ros/jazzy/share/ament_cmake/cmake/ament_cmakeConfig.cmake:41 (include)
+[3.553s]   CMakeLists.txt:9 (find_package)
+[3.553s] 
+[3.553s] [0m
+[3.553s] -- Configuring incomplete, errors occurred!
+[3.554s] gmake: *** [Makefile:226: cmake_check_build_system] Error 1
+[3.556s] Invoked command in '/home/hornet/autonomous-vehicle-/build/mobile_robot' returned '2': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/hornet/autonomous-vehicle-/build/mobile_robot -- -j16 -l16
