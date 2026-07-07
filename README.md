@@ -254,7 +254,9 @@ Can be integrated with
 ---
 
 #OUTPUTS
+<img width="1587" height="883" alt="Screenshot from 2026-07-07 22-18-26" src="https://github.com/user-attachments/assets/8661dab0-77f8-4e5c-8bef-d5892c12bac6" />
 
+---
 
 ---
 
