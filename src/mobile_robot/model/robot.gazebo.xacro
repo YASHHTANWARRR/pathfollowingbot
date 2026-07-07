@@ -86,15 +86,15 @@ sensor is world pulggin not a robot pluggin
 
 <!-- LiDAR sensor -->
 <gazebo reference="lidar_link">
-<!-- get to gpu lidar if it nromlly starts to work -->
-    <sensor name="lidar" type="lidar">
+<!-- get to gpu lidar if it nromlly starts to work also cpu lidar that is normal lidar is not supportd in ros gazebo 8-->
+    <sensor name="gpu_lidar" type="gpu_lidar">
         <!-- <ray>
             <collision>
                 <ignore_entity>robo_robot</ignore_entity>
             </collision>
         </ray> -->
-        
-    <pose relative_to="lidar_link">0 0 0 0 0 0</pose>
+        <!-- as it is directely attached to lidar link -->
+    <pose>0 0 0 0 0 0</pose>
 
     <topic>scan</topic>
     <!-- <frame_name>lidar_link</frame_name> -->
