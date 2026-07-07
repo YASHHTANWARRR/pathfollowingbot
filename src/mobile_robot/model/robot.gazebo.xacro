@@ -53,7 +53,7 @@
         <right_joint>wheel4_joint</right_joint>
 
         <wheel_separation>${2*s4}</wheel_separation>
-        <wheel_diameter>${2*radius}</wheel_diameter>
+        <wheel_radius>${radius}</wheel_radius>
 
         <max_wheel_torque>150</max_wheel_torque>
         <max_wheel_acceleration>20.0</max_wheel_acceleration>
@@ -62,7 +62,7 @@
         <tf_topic>/tf</tf_topic>
         <odom_topic>/odom</odom_topic>
         <frame_id>odom</frame_id>
-        <child_frame_id>base_footprint</child_frame_id>
+        <child_frame_id>body_footprint</child_frame_id>
         <odom_publisher_frequency>30</odom_publisher_frequency>
     </plugin>
 
