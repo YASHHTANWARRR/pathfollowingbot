@@ -1,66 +1,139 @@
-# Path Following Robot using ROS 2 Jazzy & Gazebo Sim
+# 🚗 Path Following Robot using ROS 2 Jazzy & Gazebo Sim
 
-A ROS 2 Jazzy package for simulating a **4-wheel differential drive mobile robot** equipped with a **2D GPU LiDAR** in **Gazebo Sim (Ignition Gazebo)**. This project provides a complete simulation environment for developing and testing autonomous navigation, path planning, and path following algorithms.
+A complete simulation package for a **4-wheel differential drive mobile robot** built using **ROS 2 Jazzy** and **Gazebo Sim (Ignition Gazebo)**. The robot is equipped with a **360° GPU LiDAR** and is designed for autonomous navigation research including **SLAM**, **Navigation2**, **Path Planning**, and **Path Following**.
 
 ---
 
-## Features
+## 📌 Features
 
 - 🚗 4-Wheel Differential Drive Robot
-- 📡 GPU LiDAR Sensor
+- 📡 360° GPU LiDAR
 - 🦾 URDF/Xacro Robot Model
-- 🌍 Custom Gazebo Simulation World
+- 🌍 Custom Gazebo Simulation Environment
 - ⚙️ ROS 2 Jazzy Compatible
-- 🛰️ Odometry Generation
-- 🔄 Joint State Publishing
-- 🎮 Velocity Control using `/cmd_vel`
-- 📈 Ready for SLAM Toolbox & Nav2 Integration
+- 🛰️ Differential Drive Odometry
+- 🔄 Joint State Publisher
+- 🎮 `/cmd_vel` Velocity Control
+- 📈 Ready for SLAM Toolbox
+- 🧭 Navigation2 Compatible
+- 🛣️ Designed for Autonomous Path Planning & Path Following
 
 ---
 
-## Robot Configuration
+# 🛠️ Technologies Used
 
-| Component | Description |
-|-----------|-------------|
-| Drive Type | Differential Drive |
-| Wheels | Four Wheels |
-| Sensor | GPU LiDAR |
-| Simulation | Gazebo Sim 8 |
-| ROS Version | ROS 2 Jazzy |
+- ROS 2 Jazzy
+- Gazebo Sim 8
+- URDF
+- Xacro
+- Gazebo Plugins
+- RViz2
+- SLAM Toolbox
+- Navigation2
+- ros_gz_bridge
 
 ---
 
-# Project Structure
+# 📂 Project Structure
 
 ```text
 mobile_robot/
-├── config/
+│
 ├── launch/
-│   └── gazebo_model.launch.py
+│   ├── gazebo_model.launch.py
+│   └── spawn_in_track.launch.py
+│
 ├── model/
-│   ├── robot.urdf.xacro
+│   ├── robot.xacro
 │   ├── robot.gazebo.xacro
 │   └── materials/
-├── meshes/
-├── maps/
+│
 ├── worlds/
 │   └── track.world
+│
+├── maps/
+│
 ├── rviz/
+│
+├── images/
+│   ├── gazebo_world.png
+│   ├── robot_spawn.png
+│   ├── lidar_visualization.png
+│   ├── rviz_scan.png
+│   ├── slam_map.png
+│   ├── nav2_navigation.png
+│   └── path_following.png
+│
 ├── package.xml
 └── CMakeLists.txt
 ```
 
 ---
 
-# Dependencies
+# 🤖 Robot Specifications
 
-- Ubuntu 24.04
-- ROS 2 Jazzy
-- Gazebo Sim 8
-- ros_gz
-- Xacro
+| Parameter | Value |
+|------------|-------|
+| Drive Type | Differential Drive |
+| Wheels | 4 |
+| Sensor | 360° GPU LiDAR |
+| Simulation | Gazebo Sim 8 |
+| ROS Version | ROS 2 Jazzy |
+| Robot Model | URDF + Xacro |
 
-Install dependencies
+---
+
+# ⚙️ Gazebo Plugins
+
+## Differential Drive
+
+Provides
+
+- Wheel Control
+- Odometry
+- TF
+- Velocity Commands
+
+Topics
+
+```
+/cmd_vel
+/odom
+/tf
+```
+
+---
+
+## Joint State Publisher
+
+Publishes
+
+```
+/joint_states
+```
+
+---
+
+## GPU LiDAR
+
+Publishes
+
+```
+/scan
+```
+
+Provides
+
+- 360° Laser Scan
+- Obstacle Detection
+- Mapping
+- Navigation
+
+---
+
+# 📦 Dependencies
+
+Install ROS 2 Jazzy packages
 
 ```bash
 sudo apt update
@@ -70,12 +143,15 @@ ros-jazzy-desktop \
 ros-jazzy-ros-gz \
 ros-jazzy-xacro \
 ros-jazzy-joint-state-publisher \
-ros-jazzy-robot-state-publisher
+ros-jazzy-robot-state-publisher \
+ros-jazzy-slam-toolbox \
+ros-jazzy-navigation2 \
+ros-jazzy-nav2-bringup
 ```
 
 ---
 
-# Build
+# 🔨 Build
 
 Clone into your workspace
 
@@ -87,6 +163,7 @@ Build
 
 ```bash
 cd ~/Desktop/pathfollowingbot
+
 colcon build --symlink-install
 ```
 
@@ -98,22 +175,24 @@ source install/setup.bash
 
 ---
 
-# Launch Simulation
+# ▶️ Launch Simulation
 
 ```bash
 ros2 launch mobile_robot gazebo_model.launch.py
 ```
 
-This launches
+The launch file starts
 
 - Gazebo Sim
 - Robot State Publisher
 - Robot Spawn
-- Robot Model
+- Gazebo Plugins
+- LiDAR Sensor
+- ROS-Gazebo Bridge
 
 ---
 
-# Robot Control
+# 🎮 Robot Control
 
 Move Forward
 
@@ -138,143 +217,146 @@ ros2 topic pub /cmd_vel geometry_msgs/msg/Twist \
 
 ---
 
-# ROS Topics
+# 📡 ROS Topics
 
 | Topic | Type | Description |
 |--------|------|-------------|
-| `/cmd_vel` | geometry_msgs/Twist | Velocity Commands |
+| `/cmd_vel` | geometry_msgs/Twist | Robot Velocity Commands |
 | `/odom` | nav_msgs/Odometry | Robot Odometry |
-| `/scan` | sensor_msgs/LaserScan | LiDAR Data |
-| `/joint_states` | sensor_msgs/JointState | Joint States |
-| `/tf` | tf2_msgs/TFMessage | Robot Transform Tree |
+| `/scan` | sensor_msgs/LaserScan | LiDAR Scan |
+| `/joint_states` | sensor_msgs/JointState | Wheel States |
+| `/tf` | tf2_msgs/TFMessage | Robot TF Tree |
 | `/clock` | rosgraph_msgs/Clock | Simulation Clock |
 
 ---
 
-# TF Tree
+# 🌳 TF Tree
 
 ```
 odom
 └── body_footprint
     └── body_link
-        ├── wheel_front_left
-        ├── wheel_front_right
-        ├── wheel_rear_left
-        ├── wheel_rear_right
+        ├── wheel1_link
+        ├── wheel2_link
+        ├── wheel3_link
+        ├── wheel4_link
         └── lidar_link
 ```
 
 ---
 
-# Robot Plugins
+# 🖼️ Output
 
-### Differential Drive Plugin
+## LiDAR Visualization
 
-Provides
+360° GPU LiDAR detecting surrounding obstacles.
 
-- Wheel control
-- Odometry publishing
-- TF publishing
-- Velocity commands
+<img width="1587" height="883" alt="Screenshot from 2026-07-07 22-18-26" src="https://github.com/user-attachments/assets/b7f3707b-3cd0-434a-a9f0-15f0b340f746" />
 
 ---
 
-### Joint State Publisher
+## RViz Visualization
 
-Publishes
+LaserScan visualization in RViz.
 
-```
-/joint_states
-```
+
 
 ---
 
-### GPU LiDAR
+## SLAM Mapping
 
-Publishes
+Occupancy Grid generated using SLAM Toolbox.
 
-```
-/scan
-```
-
-Used for
-
-- Mapping
-- Localization
-- Navigation
-- Obstacle Detection
 
 ---
 
-# Visualization
+## Navigation2
 
-Launch RViz
+Autonomous navigation using Nav2.
+
+---
+
+## Path Following
+
+Robot following the generated path inside the environment.
+
+
+
+---
+
+# 🗺️ SLAM
+
+Launch SLAM Toolbox
 
 ```bash
-rviz2
+ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true
 ```
 
-Recommended Displays
+Save generated map
 
-- RobotModel
-- LaserScan
-- TF
-- Odometry
-- Map
+```bash
+ros2 run nav2_map_server map_saver_cli -f my_map
+```
 
 ---
 
-# SLAM
+# 🧭 Navigation2
+
+After generating the map, launch Navigation2.
+
+Features
+
+- AMCL Localization
+- Global Planner
+- Local Planner
+- Recovery Behaviors
+- Obstacle Avoidance
+- Goal Navigation
+
+---
+
+# 🛣️ Path Planning
+
+The project can be extended with
+
+- A* Search
+- Dijkstra
+- Theta*
+- Hybrid A*
+- RRT
+- RRT*
+- PRM
+
+---
+
+# 🚙 Path Following Controllers
 
 Compatible with
 
-- SLAM Toolbox
-
-Launch
-
-```bash
-ros2 launch slam_toolbox online_async_launch.py
-```
-
----
-
-# Navigation
-
-Can be integrated with
-
-- Nav2
-- AMCL
 - Pure Pursuit
+- Regulated Pure Pursuit
 - Stanley Controller
 - MPC
-- A*
-- Dijkstra
-- RRT
+- DWB Controller
+- TEB Local Planner
 
 ---
 
-#OUTPUTS
-<img width="1587" height="883" alt="Screenshot from 2026-07-07 22-18-26" src="https://github.com/user-attachments/assets/8661dab0-77f8-4e5c-8bef-d5892c12bac6" />
+# 🚀 Future Improvements
 
----
-
----
-
-# Future Improvements
-
-- Stereo Camera
-- IMU
-- Wheel Encoders
+- IMU Integration
+- Camera Integration
+- Stereo Vision
 - EKF Localization
-- Autonomous Navigation
+- Loop Closure
 - Dynamic Obstacle Avoidance
-- Waypoint Following
-- Path Planning Algorithms
-- Occupancy Grid Mapping
+- Multi-Robot Navigation
+- Outdoor Navigation
+- GPS Integration
 
 ---
 
-# Author
+# 👨‍💻 Author
 
 **Yash Tanwar**
 
@@ -284,6 +366,4 @@ Thapar Institute of Engineering and Technology
 
 ---
 
-# License
-
-This project is licensed under the MIT License.
+# ⭐ If you found this project useful, consider giving it a Star!
