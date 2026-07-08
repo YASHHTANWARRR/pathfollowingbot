@@ -75,14 +75,6 @@ def generate_launch_description():
         ],
         output='screen',
     )
-    
-    # Scan frame corrector
-    scanFrameCorrector = Node(
-        package='mobile_robot',
-        executable='scan_frame_corrector',
-        output='screen',
-    )
-
     # bridge parameters file
     params_file = os.path.join(
         get_package_share_directory('mobile_robot'),
@@ -120,6 +112,5 @@ def generate_launch_description():
 
     LaunchDescriptionObject.add_action(nodeRobotStatePublisher)
     LaunchDescriptionObject.add_action(start_gazebo_ros_bridge_cmd)
-    LaunchDescriptionObject.add_action(scanFrameCorrector)
     
     return LaunchDescriptionObject

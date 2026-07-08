@@ -1,37 +1,39 @@
-from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
+import os
 
 from ament_index_python.packages import get_package_share_directory
-import os
+
+from launch import LaunchDescription
+from launch_ros.actions import Node
 
 
 def generate_launch_description():
 
     slam_params = os.path.join(
         get_package_share_directory('mobile_robot'),
-        'config',
-        'slam_toolbox.yaml'
+        'parameters',
+        'mapper_params_online_async.yaml'
     )
 
-    use_sim_time = LaunchConfiguration('use_sim_time')
+    scan_frame_corrector = Node(
+        package='mobile_robot',
+        executable='scan_frame_corrector',
+        output='screen'
+    )
 
-    return LaunchDescription([
+    slam_toolbox = Node(
+        package='slam_toolbox',
+        executable='async_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen',
+        parameters=[
+            slam_params,
+            {'use_sim_time': True}
+        ]
+    )
 
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='true'
-        ),
+    ld = LaunchDescription()
 
-        Node(
-            package='slam_toolbox',
-            executable='async_slam_toolbox_node',
-            name='slam_toolbox',
-            output='screen',
-            parameters=[
-                slam_params,
-                {'use_sim_time': use_sim_time}
-            ]
-        )
-    ])
+    ld.add_action(scan_frame_corrector)
+    ld.add_action(slam_toolbox)
+
+    return ld
