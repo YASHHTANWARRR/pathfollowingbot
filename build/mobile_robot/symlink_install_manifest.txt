@@ -1,5 +1,9 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/scan_frame_corrector
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/bringup.launch.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/frames_2026-07-08_23.11.33.gv
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/frames_2026-07-08_23.11.33.pdf
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/gazebo_model.launch.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/rviz.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/slam.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/spawn_in_track.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/model/.venv/.gitignore
@@ -1900,6 +1904,7 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/model/robot.gazebo.xacro
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/model/robot.xacro
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/parameters/bridge_parameters.yaml
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/parameters/mapper_params_online_async.yaml
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/worlds/build/.built_by
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/worlds/build/COLCON_IGNORE
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/worlds/install/.colcon_install_layout

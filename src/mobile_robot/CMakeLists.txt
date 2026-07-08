@@ -30,7 +30,7 @@ install(
 )
 
 install(
-  DIRECTORY launch model parameters worlds models config maps
+  DIRECTORY launch model parameters worlds models config maps rviz
   DESTINATION share/${PROJECT_NAME}
   PATTERN "build" EXCLUDE
   PATTERN "install" EXCLUDE
