@@ -97,7 +97,7 @@ sensor is world pulggin not a robot pluggin
     <pose>0 0 0 0 0 0</pose>
 
     <topic>scan</topic>
-    <!-- <frame_name>lidar_link</frame_name> -->
+    <frame_name>lidar_link</frame_name>
 
     <update_rate>10</update_rate>
 
