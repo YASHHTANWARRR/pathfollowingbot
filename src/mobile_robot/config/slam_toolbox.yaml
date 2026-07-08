@@ -10,7 +10,7 @@ slam_toolbox:
     base_frame: body_footprint
 
     # Laser
-    scan_topic: /scan
+    scan_topic: /scan_fixed
 
     # Mode
     mode: mapping
