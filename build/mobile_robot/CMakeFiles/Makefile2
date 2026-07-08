@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/hornet/Desktop/pathfollowingbot/build/mobile_robot
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all:
+all: CMakeFiles/scan_frame_corrector.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -73,6 +73,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/uninstall.dir/clean
 clean: CMakeFiles/mobile_robot_uninstall.dir/clean
+clean: CMakeFiles/scan_frame_corrector.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -126,6 +127,32 @@ mobile_robot_uninstall: CMakeFiles/mobile_robot_uninstall.dir/rule
 CMakeFiles/mobile_robot_uninstall.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mobile_robot_uninstall.dir/build.make CMakeFiles/mobile_robot_uninstall.dir/clean
 .PHONY : CMakeFiles/mobile_robot_uninstall.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/scan_frame_corrector.dir
+
+# All Build rule for target.
+CMakeFiles/scan_frame_corrector.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/scan_frame_corrector.dir/build.make CMakeFiles/scan_frame_corrector.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/scan_frame_corrector.dir/build.make CMakeFiles/scan_frame_corrector.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hornet/Desktop/pathfollowingbot/build/mobile_robot/CMakeFiles --progress-num=1,2 "Built target scan_frame_corrector"
+.PHONY : CMakeFiles/scan_frame_corrector.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/scan_frame_corrector.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hornet/Desktop/pathfollowingbot/build/mobile_robot/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/scan_frame_corrector.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hornet/Desktop/pathfollowingbot/build/mobile_robot/CMakeFiles 0
+.PHONY : CMakeFiles/scan_frame_corrector.dir/rule
+
+# Convenience name for target.
+scan_frame_corrector: CMakeFiles/scan_frame_corrector.dir/rule
+.PHONY : scan_frame_corrector
+
+# clean rule for target.
+CMakeFiles/scan_frame_corrector.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/scan_frame_corrector.dir/build.make CMakeFiles/scan_frame_corrector.dir/clean
+.PHONY : CMakeFiles/scan_frame_corrector.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

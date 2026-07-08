@@ -315,8 +315,11 @@ message(STATUS "Execute custom install script")
 
 # begin of custom install code
 
-# install(DIRECTORY "launch" "model" "parameters" "worlds" "models" "config" "DESTINATION" "share/mobile_robot" "PATTERN_EXCLUDE" "build" "PATTERN_EXCLUDE" "install" "PATTERN_EXCLUDE" "log" "PATTERN_EXCLUDE" ".venv")
-ament_cmake_symlink_install_directory("/home/hornet/Desktop/pathfollowingbot/src/mobile_robot" DIRECTORY "launch" "model" "parameters" "worlds" "models" "config" "DESTINATION" "share/mobile_robot" "PATTERN_EXCLUDE" "build" "PATTERN_EXCLUDE" "install" "PATTERN_EXCLUDE" "log" "PATTERN_EXCLUDE" ".venv")
+# install("TARGETS" "scan_frame_corrector" "DESTINATION" "lib/mobile_robot")
+include("/home/hornet/Desktop/pathfollowingbot/build/mobile_robot/ament_cmake_symlink_install_targets_0_${CMAKE_INSTALL_CONFIG_NAME}.cmake")
+
+# install(DIRECTORY "launch" "model" "parameters" "worlds" "models" "config" "maps" "DESTINATION" "share/mobile_robot" "PATTERN_EXCLUDE" "build" "PATTERN_EXCLUDE" "install" "PATTERN_EXCLUDE" "log" "PATTERN_EXCLUDE" ".venv")
+ament_cmake_symlink_install_directory("/home/hornet/Desktop/pathfollowingbot/src/mobile_robot" DIRECTORY "launch" "model" "parameters" "worlds" "models" "config" "maps" "DESTINATION" "share/mobile_robot" "PATTERN_EXCLUDE" "build" "PATTERN_EXCLUDE" "install" "PATTERN_EXCLUDE" "log" "PATTERN_EXCLUDE" ".venv")
 
 # install(FILES "/home/hornet/Desktop/pathfollowingbot/build/mobile_robot/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/mobile_robot" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/hornet/Desktop/pathfollowingbot/src/mobile_robot" FILES "/home/hornet/Desktop/pathfollowingbot/build/mobile_robot/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/mobile_robot" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")

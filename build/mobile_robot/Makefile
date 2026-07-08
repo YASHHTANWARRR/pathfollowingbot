@@ -197,6 +197,43 @@ mobile_robot_uninstall/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mobile_robot_uninstall.dir/build.make CMakeFiles/mobile_robot_uninstall.dir/build
 .PHONY : mobile_robot_uninstall/fast
 
+#=============================================================================
+# Target rules for targets named scan_frame_corrector
+
+# Build rule for target.
+scan_frame_corrector: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 scan_frame_corrector
+.PHONY : scan_frame_corrector
+
+# fast build rule for target.
+scan_frame_corrector/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/scan_frame_corrector.dir/build.make CMakeFiles/scan_frame_corrector.dir/build
+.PHONY : scan_frame_corrector/fast
+
+src/scan_frame_corrector.o: src/scan_frame_corrector.cpp.o
+.PHONY : src/scan_frame_corrector.o
+
+# target to build an object file
+src/scan_frame_corrector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/scan_frame_corrector.dir/build.make CMakeFiles/scan_frame_corrector.dir/src/scan_frame_corrector.cpp.o
+.PHONY : src/scan_frame_corrector.cpp.o
+
+src/scan_frame_corrector.i: src/scan_frame_corrector.cpp.i
+.PHONY : src/scan_frame_corrector.i
+
+# target to preprocess a source file
+src/scan_frame_corrector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/scan_frame_corrector.dir/build.make CMakeFiles/scan_frame_corrector.dir/src/scan_frame_corrector.cpp.i
+.PHONY : src/scan_frame_corrector.cpp.i
+
+src/scan_frame_corrector.s: src/scan_frame_corrector.cpp.s
+.PHONY : src/scan_frame_corrector.s
+
+# target to generate assembly for a file
+src/scan_frame_corrector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/scan_frame_corrector.dir/build.make CMakeFiles/scan_frame_corrector.dir/src/scan_frame_corrector.cpp.s
+.PHONY : src/scan_frame_corrector.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +249,10 @@ help:
 	@echo "... test"
 	@echo "... mobile_robot_uninstall"
 	@echo "... uninstall"
+	@echo "... scan_frame_corrector"
+	@echo "... src/scan_frame_corrector.o"
+	@echo "... src/scan_frame_corrector.i"
+	@echo "... src/scan_frame_corrector.s"
 .PHONY : help
 
 

@@ -7,9 +7,27 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+add_executable(scan_frame_corrector
+  src/scan_frame_corrector.cpp
+)
+
+ament_target_dependencies(
+  scan_frame_corrector
+  rclcpp
+  sensor_msgs
+)
+
+install(
+  TARGETS
+    scan_frame_corrector
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 install(
   DIRECTORY launch model parameters worlds models config maps
