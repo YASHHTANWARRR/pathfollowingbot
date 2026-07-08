@@ -259,6 +259,7 @@ odom
 
 LaserScan visualization in RViz.
 
+<img width="1877" height="1072" alt="image" src="https://github.com/user-attachments/assets/0c65a87f-98ac-4584-beab-3968bf1526b8" />
 
 
 ---
@@ -266,6 +267,7 @@ LaserScan visualization in RViz.
 ## SLAM Mapping
 
 Occupancy Grid generated using SLAM Toolbox.
+
 
 
 ---
