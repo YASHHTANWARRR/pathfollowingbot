@@ -12,7 +12,7 @@ def generate_launch_description():
 
     slam_params = os.path.join(
         get_package_share_directory("mobile_robot"),
-        "parameters",
+        "config",
         "slam_toolbox.yaml"
     )
 
