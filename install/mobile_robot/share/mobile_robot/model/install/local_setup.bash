@@ -1,0 +1,1 @@
+/home/hornet/Desktop/pathfollowingbot/src/mobile_robot/model/install/local_setup.bash

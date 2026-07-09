@@ -1,0 +1,1 @@
+/home/hornet/Desktop/pathfollowingbot/src/mobile_robot/worlds/install/local_setup.zsh
