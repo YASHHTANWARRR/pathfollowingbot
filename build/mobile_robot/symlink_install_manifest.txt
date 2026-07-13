@@ -1950,6 +1950,7 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/maps/test_track.png
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/maps/test_track.yaml
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/rviz/slam.rviz
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/docs/PURE_PURSUIT.md
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/ament_index/resource_index/package_run_dependencies/mobile_robot
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/ament_index/resource_index/parent_prefix_path/mobile_robot
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/environment/ament_prefix_path.sh
