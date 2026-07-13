@@ -1,9 +1,17 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/scan_frame_corrector
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/path_planner.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/image_to_world.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/track_to_walls.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/pure_pursuit.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/publish_path.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/bringup.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/frames_2026-07-08_23.11.33.gv
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/frames_2026-07-08_23.11.33.pdf
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/gazebo_model.launch.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/map_saver.launch.py
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/nav2.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/os
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/path_follower.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/rviz.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/slam.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/spawn_in_track.launch.py
@@ -1936,6 +1944,7 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/track_walls/model.config
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/track_walls/model.sdf
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/config/nav2_map.rviz
+/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/config/nav2_params.yaml
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/config/slam_toolbox.yaml
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/maps/pasted_image.png
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/maps/test_track.png

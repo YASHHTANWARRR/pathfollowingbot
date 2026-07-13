@@ -30,6 +30,16 @@ install(
 )
 
 install(
+  PROGRAMS
+    scripts/path_planner.py
+    scripts/image_to_world.py
+    scripts/track_to_walls.py
+    scripts/pure_pursuit.py
+    scripts/publish_path.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
   DIRECTORY launch model parameters worlds models config maps rviz
   DESTINATION share/${PROJECT_NAME}
   PATTERN "build" EXCLUDE
