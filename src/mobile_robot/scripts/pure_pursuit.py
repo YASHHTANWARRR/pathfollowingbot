@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
-from nav_msgs.msg import Odometry, Path
+from nav_msgs.msg import Path, Odometry
 from geometry_msgs.msg import Twist, PoseStamped
 import numpy as np
 from rcl_interfaces.msg import SetParametersResult
+import tf2_ros
 
 
 class PurePursuit(Node):
@@ -16,23 +17,35 @@ class PurePursuit(Node):
         self.declare_parameter('max_linear_speed', 0.5)
         self.declare_parameter('max_angular_speed', 1.0)
         self.declare_parameter('goal_tolerance', 0.3)
+        self.declare_parameter('control_frequency', 20.0)
+        self.declare_parameter('robot_frame', 'body_footprint')
+        self.declare_parameter('odom_frame', 'odom')
 
         self.lookahead_dist = self.get_parameter('lookahead_dist').value
         self.max_v = self.get_parameter('max_linear_speed').value
         self.max_w = self.get_parameter('max_angular_speed').value
         self.goal_tol = self.get_parameter('goal_tolerance').value
+        self.robot_frame = self.get_parameter('robot_frame').value
+        self.odom_frame = self.get_parameter('odom_frame').value
 
         self.path = None
-        self.robot_pose = None
+        self.path_frame = self.odom_frame
         self.path_index = 0
+
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
 
         self.odom_sub = self.create_subscription(
             Odometry, '/odom', self.odom_callback, 10)
+        self.latest_odom = None
 
         self.path_sub = self.create_subscription(
             Path, '/plan', self.path_callback, 10)
 
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+
+        dt = 1.0 / self.get_parameter('control_frequency').value
+        self.control_timer = self.create_timer(dt, self.control_loop)
 
         self.add_on_set_parameters_callback(self.param_callback)
         self.get_logger().info('Pure Pursuit node started')
@@ -51,20 +64,45 @@ class PurePursuit(Node):
 
     def path_callback(self, msg):
         self.path = msg.poses
+        self.path_frame = msg.header.frame_id
         self.path_index = 0
-        self.get_logger().info(f'Received path with {len(self.path)} waypoints')
+        if self.path_frame == '':
+            self.path_frame = 'odom'
+        self.get_logger().info(
+            f'Received path: {len(self.path)} waypoints in frame {self.path_frame}'
+        )
 
     def odom_callback(self, msg):
+        self.latest_odom = msg
+
+    def get_robot_pose(self):
+        if self.path_frame == self.odom_frame and self.latest_odom:
+            px = self.latest_odom.pose.pose.position.x
+            py = self.latest_odom.pose.pose.position.y
+            q = self.latest_odom.pose.pose.orientation
+            _, _, yaw = self.euler_from_quaternion(q)
+            return px, py, yaw
+        try:
+            t = self.tf_buffer.lookup_transform(
+                self.path_frame, self.robot_frame, rclpy.time.Time())
+            px = t.transform.translation.x
+            py = t.transform.translation.y
+            q = t.transform.rotation
+            _, _, yaw = self.euler_from_quaternion(q)
+            return px, py, yaw
+        except Exception:
+            return None
+
+    def control_loop(self):
         if self.path is None or len(self.path) == 0:
             return
 
-        px = msg.pose.pose.position.x
-        py = msg.pose.pose.position.y
-        q = msg.pose.pose.orientation
-        _, _, yaw = self.euler_from_quaternion(q)
-        self.robot_pose = (px, py, yaw)
+        pose = self.get_robot_pose()
+        if pose is None:
+            return
 
-        twist = self.compute_control()
+        px, py, yaw = pose
+        twist = self.compute_control(px, py, yaw)
         self.cmd_pub.publish(twist)
 
     def euler_from_quaternion(self, q):
@@ -73,9 +111,8 @@ class PurePursuit(Node):
         yaw = np.arctan2(siny_cosp, cosy_cosp)
         return 0.0, 0.0, yaw
 
-    def compute_control(self):
+    def compute_control(self, px, py, yaw):
         twist = Twist()
-        px, py, yaw = self.robot_pose
 
         closest_idx = self.find_closest_index(px, py)
         target_idx = self.find_lookahead_index(closest_idx, px, py)
