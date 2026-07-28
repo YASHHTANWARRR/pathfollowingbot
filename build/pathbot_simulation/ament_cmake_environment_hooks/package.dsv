@@ -1,0 +1,4 @@
+source;share/pathbot_simulation/local_setup.bash
+source;share/pathbot_simulation/local_setup.dsv
+source;share/pathbot_simulation/local_setup.sh
+source;share/pathbot_simulation/local_setup.zsh

@@ -1,1 +1,0 @@
-/home/hornet/Desktop/pathfollowingbot/src/mobile_robot/launch/map_saver.launch.py

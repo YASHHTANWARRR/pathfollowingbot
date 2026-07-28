@@ -1,0 +1,1 @@
+/home/hornet/Desktop/pathfollowingbot/src/pathbot_control/scripts/publish_path.py

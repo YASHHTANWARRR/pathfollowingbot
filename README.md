@@ -9,8 +9,9 @@ A complete simulation package for a **4-wheel differential drive mobile robot** 
 - 🚗 4-Wheel Differential Drive Robot
 - 📡 360° GPU LiDAR
 - 🦾 URDF/Xacro Robot Model
-- 🌍 Custom Gazebo Simulation Environment
+- 🏭 AWS RoboMaker Small Warehouse World
 - ⚙️ ROS 2 Jazzy Compatible
+- 🧩 Multi-package workspace (bringup / simulation / description / navigation / control / nodes)
 - 🛰️ Differential Drive Odometry
 - 🔄 Joint State Publisher
 - 🎮 `/cmd_vel` Velocity Control
@@ -36,37 +37,58 @@ A complete simulation package for a **4-wheel differential drive mobile robot** 
 
 # 📂 Project Structure
 
+The workspace is split into focused ROS 2 packages under `src/`:
+
 ```text
-mobile_robot/
+src/
 │
-├── launch/
-│   ├── gazebo_model.launch.py
-│   └── spawn_in_track.launch.py
+├── pathbot_bringup/          # Top-level launch that starts everything together
+│   └── launch/
+│       └── bringup.launch.py
 │
-├── model/
-│   ├── robot.xacro
-│   ├── robot.gazebo.xacro
-│   └── materials/
+├── pathbot_simulation/       # Gazebo world, warehouse models, robot spawning
+│   ├── launch/
+│   │   ├── gazebo_model.launch.py
+│   │   └── spawn_in_track.launch.py
+│   ├── worlds/
+│   │   └── small_warehouse.world
+│   ├── models/                 # AWS RoboMaker warehouse assets
+│   └── config/
+│       └── bridge_parameters.yaml
 │
-├── worlds/
-│   └── track.world
+├── pathbot_description/      # Robot URDF/Xacro model + RViz viewing
+│   ├── urdf/
+│   │   ├── robot.xacro
+│   │   └── robot.gazebo.xacro
+│   ├── rviz/
+│   │   └── slam.rviz
+│   └── launch/
+│       └── rviz.launch.py
 │
-├── maps/
+├── pathbot_navigation/       # SLAM, Nav2, map saving
+│   ├── launch/
+│   │   ├── slam.launch.py
+│   │   ├── nav2.launch.py
+│   │   └── map_saver.launch.py
+│   ├── config/
+│   │   ├── slam_toolbox.yaml
+│   │   └── nav2_params.yaml
+│   └── maps/
 │
-├── rviz/
+├── pathbot_control/          # Pure pursuit path following
+│   ├── scripts/
+│   │   ├── pure_pursuit.py
+│   │   ├── publish_path.py
+│   │   └── path_planner.py
+│   └── launch/
+│       └── path_follower.launch.py
 │
-├── images/
-│   ├── gazebo_world.png
-│   ├── robot_spawn.png
-│   ├── lidar_visualization.png
-│   ├── rviz_scan.png
-│   ├── slam_map.png
-│   ├── nav2_navigation.png
-│   └── path_following.png
-│
-├── package.xml
-└── CMakeLists.txt
+└── pathbot_nodes/            # Custom C++ nodes
+    └── src/
+        └── scan_frame_corrector.cpp
 ```
+
+Each package has its own `package.xml` and `CMakeLists.txt`. See [COMMANDS.md](COMMANDS.md) for the full command reference.
 
 ---
 
@@ -159,7 +181,7 @@ Clone into your workspace
 cd ~/Desktop/pathfollowingbot/src
 ```
 
-Build
+Build (all packages)
 
 ```bash
 cd ~/Desktop/pathfollowingbot
@@ -167,9 +189,16 @@ cd ~/Desktop/pathfollowingbot
 colcon build --symlink-install
 ```
 
+Build a single package
+
+```bash
+colcon build --packages-select pathbot_simulation
+```
+
 Source
 
 ```bash
+source /opt/ros/jazzy/setup.bash
 source install/setup.bash
 ```
 
@@ -178,17 +207,23 @@ source install/setup.bash
 # ▶️ Launch Simulation
 
 ```bash
-ros2 launch mobile_robot gazebo_model.launch.py
+ros2 launch pathbot_simulation gazebo_model.launch.py
 ```
 
 The launch file starts
 
-- Gazebo Sim
+- Gazebo Sim (AWS RoboMaker small warehouse world)
 - Robot State Publisher
 - Robot Spawn
 - Gazebo Plugins
 - LiDAR Sensor
 - ROS-Gazebo Bridge
+
+Or launch everything together (Gazebo + SLAM + Nav2 + RViz):
+
+```bash
+ros2 launch pathbot_bringup bringup.launch.py
+```
 
 ---
 
@@ -288,16 +323,22 @@ Robot following the generated path inside the environment.
 
 # 🗺️ SLAM
 
-Launch SLAM Toolbox
+Launch SLAM
 
 ```bash
-ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true
+ros2 launch pathbot_navigation slam.launch.py
+```
+
+Visualize in RViz
+
+```bash
+ros2 launch pathbot_description rviz.launch.py
 ```
 
 Save generated map
 
 ```bash
-ros2 run nav2_map_server map_saver_cli -f my_map
+ros2 launch pathbot_navigation map_saver.launch.py
 ```
 
 ---
@@ -305,6 +346,10 @@ ros2 run nav2_map_server map_saver_cli -f my_map
 # 🧭 Navigation2
 
 After generating the map, launch Navigation2.
+
+```bash
+ros2 launch pathbot_navigation nav2.launch.py
+```
 
 Features
 
@@ -331,9 +376,21 @@ The project can be extended with
 
 ---
 
-# 🚙 Path Following Controllers
+# 🚙 Path Following
 
-Compatible with
+Launch the pure pursuit controller (with the path publisher):
+
+```bash
+ros2 launch pathbot_control path_follower.launch.py
+```
+
+With custom parameters:
+
+```bash
+ros2 launch pathbot_control path_follower.launch.py lookahead_dist:=1.5 max_speed:=0.3
+```
+
+Also compatible with
 
 - Pure Pursuit
 - Regulated Pure Pursuit

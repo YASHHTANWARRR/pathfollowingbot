@@ -1,0 +1,9 @@
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/uninstall.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/pathbot_description_uninstall.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/test.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/edit_cache.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/rebuild_cache.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/list_install_components.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/install.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/install/local.dir
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/CMakeFiles/install/strip.dir

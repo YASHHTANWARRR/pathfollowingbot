@@ -1,0 +1,1 @@
+/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/ament_cmake_core/pathbot_descriptionConfig-version.cmake

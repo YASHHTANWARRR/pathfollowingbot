@@ -1,1 +1,0 @@
-/home/hornet/Desktop/pathfollowingbot/src/mobile_robot/scripts/pure_pursuit.py

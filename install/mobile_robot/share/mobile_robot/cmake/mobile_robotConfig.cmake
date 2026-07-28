@@ -1,1 +1,0 @@
-/home/hornet/Desktop/pathfollowingbot/build/mobile_robot/ament_cmake_core/mobile_robotConfig.cmake
