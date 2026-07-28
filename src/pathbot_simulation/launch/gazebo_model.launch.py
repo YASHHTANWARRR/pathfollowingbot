@@ -18,7 +18,7 @@ def generate_launch_description():
     descriptionPackage = 'pathbot_description'
 
     # relative path of the xacro file
-    modelFileRelativePath = 'urdf/robot.xacro'
+    modelFileRelativePath = 'urdf/robot.gazebo.xacro'
     worldFileRelativePath = 'worlds/small_warehouse.world'
 
     # absolute path of the model
@@ -75,8 +75,8 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-name', robotXacroName,
-            '-x', '-7.0',
-            '-y', '-4.0',
+            '-x', '0.0',
+            '-y', '0.0',
             '-z', '0.5'
         ],
         output='screen',

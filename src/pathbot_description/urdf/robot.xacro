@@ -91,7 +91,6 @@
 
 <!-- complete inertial system of the body -->
 <!-- FILE THAT INCLUDES GAZEBO OPTIONS AND MOTION CONTROLS-->
-<xacro:include filename ="$(find pathbot_description)/urdf/robot.gazebo.xacro"/>
 
 <!-- THE BASIC COORDINATE SYSTEM IS CENTERED AT THE GEOMETRIC CENTER OF THE BODY LINK -->
 

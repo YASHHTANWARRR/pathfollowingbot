@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="https://www.ros.org/wiki/xacro">
+<robot name="robo_robot" xmlns:xacro="https://www.ros.org/wiki/xacro">
+
+<xacro:include filename ="$(find pathbot_description)/urdf/robot.xacro"/>
 
 <!-- <gazebo>
     <model>

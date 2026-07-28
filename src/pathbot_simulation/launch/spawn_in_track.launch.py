@@ -11,7 +11,7 @@ def generate_launch_description():
 
     pkg_path = get_package_share_directory('pathbot_description')
 
-    xacro_file = os.path.join(pkg_path, 'urdf', 'robot.xacro')
+    xacro_file = os.path.join(pkg_path, 'urdf', 'robot.gazebo.xacro')
 
     robot_description = ParameterValue(
         Command(['xacro ', xacro_file]),  # <-- space is important
