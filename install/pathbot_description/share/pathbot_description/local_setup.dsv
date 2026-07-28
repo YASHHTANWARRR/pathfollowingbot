@@ -1,1 +1,2 @@
-/home/hornet/Desktop/pathfollowingbot/build/pathbot_description/ament_cmake_environment_hooks/local_setup.dsv
+source;share/pathbot_description/environment/ament_prefix_path.sh
+source;share/pathbot_description/environment/path.sh

@@ -107,7 +107,7 @@
    <inertial>
    <origin xyz = " 0 0 ${radius}" rpy = "0 0 0"/>
    <mass value = "${body_mass}"/>
-   <inertia ixx ="${Ix_body}" ixy = "0.0" ixz ="0.0" iyy ="${Iz_body}" iyz = "0.0" izz= "${Iy_body}"/>
+   <inertia ixx ="${Ix_body}" ixy = "0.0" ixz ="0.0" iyy ="${Iy_body}" iyz = "0.0" izz= "${Iz_body}"/>
    </inertial>
 </xacro:macro>
 
@@ -299,11 +299,10 @@
 
 <!-- LIDAR -->
 
-<joint name = "lidar_joint" type = "fixed">  
+<joint name = "lidar_joint" type = "fixed">
    <origin xyz="0 0 0.35" rpy="0 0 0"/>
    <parent link="body_link"/>
    <child link="lidar_link"/>
-   <axis xyz="0 1 0" rpy="0 0 0"/>
 </joint>
 
 <link name="lidar_link">

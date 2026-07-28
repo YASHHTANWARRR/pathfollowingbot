@@ -103,14 +103,7 @@ def generate_launch_description():
     start_gazebo_ros_bridge_cmd = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=[
-            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-            "/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry",
-            "/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
-            "/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist",
-            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
-            "/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model",
-        ],
+        parameters=[{'config_file': params_file}],
         output='screen',
     )
 

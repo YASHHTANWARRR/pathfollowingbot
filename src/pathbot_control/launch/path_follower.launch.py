@@ -18,6 +18,7 @@ def generate_launch_description():
         parameters=[{
             'lookahead_dist': LaunchConfiguration('lookahead_dist'),
             'max_linear_speed': LaunchConfiguration('max_speed'),
+            'use_sim_time': True,
         }],
         output='screen',
     )
@@ -25,6 +26,7 @@ def generate_launch_description():
     path_pub_node = Node(
         package='pathbot_control',
         executable='publish_path.py',
+        parameters=[{'use_sim_time': True}],
         output='screen',
     )
 

@@ -1,0 +1,10 @@
+[0.000000] (-) TimerEvent: {}
+[0.000067] (-) JobUnselected: {'identifier': 'pathbot_bringup'}
+[0.000098] (-) JobUnselected: {'identifier': 'pathbot_control'}
+[0.000116] (-) JobUnselected: {'identifier': 'pathbot_description'}
+[0.000130] (-) JobUnselected: {'identifier': 'pathbot_navigation'}
+[0.000144] (-) JobUnselected: {'identifier': 'pathbot_nodes'}
+[0.000159] (pathbot_simulation) JobQueued: {'identifier': 'pathbot_simulation', 'dependencies': OrderedDict({'pathbot_description': '/home/hornet/Desktop/pathfollowingbot/src/install/pathbot_description'})}
+[0.000182] (pathbot_simulation) JobStarted: {'identifier': 'pathbot_simulation'}
+[0.007026] (pathbot_simulation) JobEnded: {'identifier': 'pathbot_simulation', 'rc': 1}
+[0.017491] (-) EventReactorShutdown: {}

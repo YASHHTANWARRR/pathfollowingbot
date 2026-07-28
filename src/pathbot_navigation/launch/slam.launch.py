@@ -19,6 +19,7 @@ def generate_launch_description():
     scan_frame_corrector = Node(
         package="pathbot_nodes",
         executable="scan_frame_corrector",
+        parameters=[{"use_sim_time": True}],
         output="screen"
     )
 
