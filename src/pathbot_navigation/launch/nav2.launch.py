@@ -27,7 +27,7 @@ def generate_launch_description():
             'params_file': params_file,
             'use_sim_time': 'true',
             'autostart': 'true',
-            'use_composition': 'false',
+            'use_composition': 'False',
             'slam': 'False',
             'use_localization': 'False',
         }.items(),
