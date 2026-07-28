@@ -283,19 +283,11 @@ odom
 
 # 🖼️ Output
 
-## LiDAR Visualization
+## LiDAR Visualization & RViz Visualization
 
 360° GPU LiDAR detecting surrounding obstacles.
 
-<img width="1587" height="883" alt="Screenshot from 2026-07-07 22-18-26" src="https://github.com/user-attachments/assets/b7f3707b-3cd0-434a-a9f0-15f0b340f746" />
-
----
-
-## RViz Visualization
-
-LaserScan visualization in RViz.
-
-<img width="1877" height="1072" alt="image" src="https://github.com/user-attachments/assets/0c65a87f-98ac-4584-beab-3968bf1526b8" />
+https://github.com/user-attachments/assets/84c23e6d-995f-4ba7-b852-efda8f157804
 
 
 ---
