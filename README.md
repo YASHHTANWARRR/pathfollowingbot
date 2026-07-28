@@ -296,6 +296,7 @@ https://github.com/user-attachments/assets/84c23e6d-995f-4ba7-b852-efda8f157804
 
 Occupancy Grid generated using SLAM Toolbox.
 
+<img width="1920" height="1073" alt="image" src="https://github.com/user-attachments/assets/d7241936-fd0b-463f-ab6d-2018fa48bc4a" />
 
 
 ---
