@@ -32,10 +32,19 @@ Build a single package:
 colcon build --packages-select pathbot_simulation
 ```
 
-## 2. Launch Gazebo + robot (warehouse world)
+## 2. Launch Gazebo + robot (Nav2 warehouse world)
 
 ```bash
 ros2 launch pathbot_simulation gazebo_model.launch.py
+```
+
+First run downloads the world's props from Gazebo Fuel into `~/.gz/fuel`
+(~1–2 min, needs internet). Later runs use the cache.
+
+If the robot spawns before the world finishes loading, increase the delay:
+
+```bash
+ros2 launch pathbot_simulation gazebo_model.launch.py spawn_delay:=20.0
 ```
 
 Or the full bringup (Gazebo + SLAM + Nav2 + RViz, see [bringup.launch.py](src/pathbot_bringup/launch/bringup.launch.py)):

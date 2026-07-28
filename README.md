@@ -9,7 +9,7 @@ A complete simulation package for a **4-wheel differential drive mobile robot** 
 - 🚗 4-Wheel Differential Drive Robot
 - 📡 360° GPU LiDAR
 - 🦾 URDF/Xacro Robot Model
-- 🏭 AWS RoboMaker Small Warehouse World
+- 🏭 Nav2 Warehouse World (Gazebo Fuel assets)
 - ⚙️ ROS 2 Jazzy Compatible
 - 🧩 Multi-package workspace (bringup / simulation / description / navigation / control / nodes)
 - 🛰️ Differential Drive Odometry
@@ -50,9 +50,6 @@ src/
 │   ├── launch/
 │   │   ├── gazebo_model.launch.py
 │   │   └── spawn_in_track.launch.py
-│   ├── worlds/
-│   │   └── small_warehouse.world
-│   ├── models/                 # AWS RoboMaker warehouse assets
 │   └── config/
 │       └── bridge_parameters.yaml
 │
@@ -212,12 +209,16 @@ ros2 launch pathbot_simulation gazebo_model.launch.py
 
 The launch file starts
 
-- Gazebo Sim (AWS RoboMaker small warehouse world)
+- Gazebo Sim (Nav2 warehouse world)
 - Robot State Publisher
 - Robot Spawn
 - Gazebo Plugins
 - LiDAR Sensor
 - ROS-Gazebo Bridge
+
+> **First launch is slow.** The Nav2 warehouse world downloads its props from
+> [Gazebo Fuel](https://fuel.gazebosim.org) into `~/.gz/fuel` — expect ~1–2 minutes
+> and an internet connection the first time. Later launches use the cache.
 
 Or launch everything together (Gazebo + SLAM + Nav2 + RViz):
 
