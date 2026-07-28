@@ -2,9 +2,9 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (IncludeLaunchDescription, TimerAction,
-                            SetEnvironmentVariable, DeclareLaunchArgument)
+                            DeclareLaunchArgument)
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import EnvironmentVariable, LaunchConfiguration
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import xacro
 
@@ -36,21 +36,6 @@ def generate_launch_description():
         'warehouse.sdf'
     )
 
-    # local models directory, so any model:// URIs still resolve
-    pathModelsDir = os.path.join(
-        get_package_share_directory(namePackage),
-        'models'
-    )
-
-    setGazeboResourcePath = SetEnvironmentVariable(
-        name='GZ_SIM_RESOURCE_PATH',
-        value=[
-            pathModelsDir,
-            os.pathsep,
-            EnvironmentVariable('GZ_SIM_RESOURCE_PATH', default_value='')
-        ]
-    )
-
     # get robot description
     robotDescription = xacro.process_file(pathModelFile).toxml()
 
@@ -63,7 +48,7 @@ def generate_launch_description():
         )
     )
 
-    # start Gazebo with the path-planning track world
+    # start Gazebo with the warehouse world
     gazeboLaunch = IncludeLaunchDescription(
         gazebo_rosPackageLaunch,
         launch_arguments={
@@ -123,7 +108,6 @@ def generate_launch_description():
                         'the robot.'
         )
     )
-    LaunchDescriptionObject.add_action(setGazeboResourcePath)
     LaunchDescriptionObject.add_action(gazeboLaunch)
 
     # Give Gazebo time to finish loading the warehouse meshes before spawning,

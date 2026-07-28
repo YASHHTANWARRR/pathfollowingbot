@@ -45,8 +45,6 @@ endif()
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/pathbot_simulation" TYPE DIRECTORY FILES
     "/home/hornet/Desktop/pathfollowingbot/src/pathbot_simulation/launch"
-    "/home/hornet/Desktop/pathfollowingbot/src/pathbot_simulation/worlds"
-    "/home/hornet/Desktop/pathfollowingbot/src/pathbot_simulation/models"
     "/home/hornet/Desktop/pathfollowingbot/src/pathbot_simulation/config"
     )
 endif()
