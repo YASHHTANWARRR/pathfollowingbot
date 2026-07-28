@@ -1,9 +1,10 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, TimerAction, SetEnvironmentVariable
+from launch.actions import (IncludeLaunchDescription, TimerAction,
+                            SetEnvironmentVariable, DeclareLaunchArgument)
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import EnvironmentVariable
+from launch.substitutions import EnvironmentVariable, LaunchConfiguration
 from launch_ros.actions import Node
 import xacro
 
@@ -111,13 +112,24 @@ def generate_launch_description():
     # launch description
     LaunchDescriptionObject = LaunchDescription()
 
+    LaunchDescriptionObject.add_action(
+        DeclareLaunchArgument(
+            'spawn_delay',
+            default_value='12.0',
+            description='Seconds to wait before spawning the robot, so the '
+                        'Gazebo GUI is fully loaded and shows it.'
+        )
+    )
     LaunchDescriptionObject.add_action(setGazeboResourcePath)
     LaunchDescriptionObject.add_action(gazeboLaunch)
 
-    # delay spawn so sensors (LiDAR) attach correctly
+    # Delay the spawn until the Gazebo GUI has finished loading the warehouse
+    # meshes and taken its initial scene snapshot. If we spawn earlier, the GUI
+    # snapshots the world *before* the robot exists and it never appears in the
+    # Entity Tree / 3D view even though the server has it.
     LaunchDescriptionObject.add_action(
         TimerAction(
-            period=3.0,
+            period=LaunchConfiguration('spawn_delay'),
             actions=[spawnModelNodeGazebo]
         )
     )

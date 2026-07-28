@@ -1,6 +1,5 @@
 /home/hornet/Desktop/pathfollowingbot/install/pathbot_description/share/pathbot_description/launch/rviz.launch.py
 /home/hornet/Desktop/pathfollowingbot/install/pathbot_description/share/pathbot_description/urdf/robot.gazebo.xacro
-/home/hornet/Desktop/pathfollowingbot/install/pathbot_description/share/pathbot_description/urdf/robot.xacro
 /home/hornet/Desktop/pathfollowingbot/install/pathbot_description/share/pathbot_description/rviz/slam.rviz
 /home/hornet/Desktop/pathfollowingbot/install/pathbot_description/share/ament_index/resource_index/package_run_dependencies/pathbot_description
 /home/hornet/Desktop/pathfollowingbot/install/pathbot_description/share/ament_index/resource_index/parent_prefix_path/pathbot_description
