@@ -4,7 +4,7 @@ project(pathbot_simulation)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY launch worlds models config
+  DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )
 

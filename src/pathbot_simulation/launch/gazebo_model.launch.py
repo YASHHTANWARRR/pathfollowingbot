@@ -2,9 +2,9 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (IncludeLaunchDescription, TimerAction,
-                            SetEnvironmentVariable, DeclareLaunchArgument)
+                            DeclareLaunchArgument)
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import EnvironmentVariable, LaunchConfiguration
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import xacro
 
@@ -20,7 +20,6 @@ def generate_launch_description():
 
     # relative path of the xacro file
     modelFileRelativePath = 'urdf/robot.gazebo.xacro'
-    worldFileRelativePath = 'worlds/small_warehouse.world'
 
     # absolute path of the model
     pathModelFile = os.path.join(
@@ -28,24 +27,13 @@ def generate_launch_description():
         modelFileRelativePath
     )
 
+    # Nav2's warehouse world. Its props are pulled from Fuel
+    # (fuel.gazebosim.org) and cached in ~/.gz/fuel, so the first launch needs
+    # an internet connection and takes a while to download.
     pathWorldFile = os.path.join(
-        get_package_share_directory(namePackage),
-        worldFileRelativePath
-    )
-
-    # models directory so Gazebo can resolve model:// URIs used by the warehouse world
-    pathModelsDir = os.path.join(
-        get_package_share_directory(namePackage),
-        'models'
-    )
-
-    setGazeboResourcePath = SetEnvironmentVariable(
-        name='GZ_SIM_RESOURCE_PATH',
-        value=[
-            pathModelsDir,
-            os.pathsep,
-            EnvironmentVariable('GZ_SIM_RESOURCE_PATH', default_value='')
-        ]
+        get_package_share_directory('nav2_minimal_tb4_sim'),
+        'worlds',
+        'warehouse.sdf'
     )
 
     # get robot description
@@ -60,7 +48,7 @@ def generate_launch_description():
         )
     )
 
-    # start Gazebo with the path-planning track world
+    # start Gazebo with the warehouse world
     gazeboLaunch = IncludeLaunchDescription(
         gazebo_rosPackageLaunch,
         launch_arguments={
@@ -115,18 +103,16 @@ def generate_launch_description():
     LaunchDescriptionObject.add_action(
         DeclareLaunchArgument(
             'spawn_delay',
-            default_value='12.0',
-            description='Seconds to wait before spawning the robot, so the '
-                        'Gazebo GUI is fully loaded and shows it.'
+            default_value='6.0',
+            description='Seconds to wait after Gazebo starts before spawning '
+                        'the robot.'
         )
     )
-    LaunchDescriptionObject.add_action(setGazeboResourcePath)
     LaunchDescriptionObject.add_action(gazeboLaunch)
 
-    # Delay the spawn until the Gazebo GUI has finished loading the warehouse
-    # meshes and taken its initial scene snapshot. If we spawn earlier, the GUI
-    # snapshots the world *before* the robot exists and it never appears in the
-    # Entity Tree / 3D view even though the server has it.
+    # Give Gazebo time to finish loading the warehouse meshes before spawning,
+    # so the robot lands in a fully-initialised world (and its LiDAR attaches).
+    # Tune with: spawn_delay:=<seconds>
     LaunchDescriptionObject.add_action(
         TimerAction(
             period=LaunchConfiguration('spawn_delay'),

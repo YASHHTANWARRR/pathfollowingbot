@@ -1,1 +1,1 @@
-pathbot_description;xacro;robot_state_publisher;ros_gz_sim;ros_gz_bridge;ament_lint_auto;ament_lint_common
+pathbot_description;xacro;robot_state_publisher;ros_gz_sim;ros_gz_bridge;nav2_minimal_tb4_sim;ament_lint_auto;ament_lint_common

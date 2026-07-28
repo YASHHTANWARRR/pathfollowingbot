@@ -51,11 +51,11 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    # The robot spawns ~12s in (see pathbot_simulation/gazebo_model.launch.py),
+    # The robot spawns ~6s in (see pathbot_simulation/gazebo_model.launch.py),
     # so SLAM and Nav2 must start after that or they come up with no TF/scan.
     ld.add_action(gazebo)
-    ld.add_action(TimerAction(period=15.0, actions=[slam]))
-    ld.add_action(TimerAction(period=20.0, actions=[nav2]))
+    ld.add_action(TimerAction(period=9.0, actions=[slam]))
+    ld.add_action(TimerAction(period=13.0, actions=[nav2]))
     ld.add_action(rviz)
 
     return ld
