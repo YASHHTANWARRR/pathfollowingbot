@@ -490,3 +490,4 @@ ros2 run tf2_ros tf2_monitor
 | `scripts/pure_pursuit.py` | 188 | Controller implementation |
 | `scripts/publish_path.py` | 59 | Demo path publisher |
 | `launch/path_follower.launch.py` | 35 | Launch orchestration |
+`

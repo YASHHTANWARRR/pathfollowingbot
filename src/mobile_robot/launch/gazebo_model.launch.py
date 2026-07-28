@@ -1,8 +1,9 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, TimerAction
+from launch.actions import IncludeLaunchDescription, TimerAction, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import EnvironmentVariable
 from launch_ros.actions import Node
 import xacro
 
@@ -17,7 +18,7 @@ def generate_launch_description():
 
     # relative path of the xacro file
     modelFileRelativePath = 'model/robot.xacro'
-    worldFileRelativePath = 'worlds/track.world'
+    worldFileRelativePath = 'worlds/small_warehouse.world'
 
     # absolute path of the model
     pathModelFile = os.path.join(
@@ -28,6 +29,21 @@ def generate_launch_description():
     pathWorldFile = os.path.join(
         get_package_share_directory(namePackage),
         worldFileRelativePath
+    )
+
+    # models directory so Gazebo can resolve model:// URIs used by the warehouse world
+    pathModelsDir = os.path.join(
+        get_package_share_directory(namePackage),
+        'models'
+    )
+
+    setGazeboResourcePath = SetEnvironmentVariable(
+        name='GZ_SIM_RESOURCE_PATH',
+        value=[
+            pathModelsDir,
+            os.pathsep,
+            EnvironmentVariable('GZ_SIM_RESOURCE_PATH', default_value='')
+        ]
     )
 
     # get robot description
@@ -101,6 +117,7 @@ def generate_launch_description():
     # launch description
     LaunchDescriptionObject = LaunchDescription()
 
+    LaunchDescriptionObject.add_action(setGazeboResourcePath)
     LaunchDescriptionObject.add_action(gazeboLaunch)
 
     # delay spawn so sensors (LiDAR) attach correctly
