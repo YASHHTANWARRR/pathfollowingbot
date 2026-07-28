@@ -90,7 +90,35 @@ colcon build --packages-select pathbot_navigation && source install/setup.bash
 ```
 
 Drive **slowly and revisit places** — map quality directly determines how well
-AMCL localizes afterwards.
+AMCL localizes afterwards. Cover the walls (drive the perimeter), and return
+along paths you have already taken so slam_toolbox gets loop closures.
+
+## 4b. Odometry calibration (only if you change the wheels/chassis)
+
+This robot is a 4-wheel **skid-steer** driven by a differential-drive plugin.
+Its wheels scrub sideways when turning, so odometry over-reports rotation
+unless `wheel_separation` is inflated above the geometric track. That factor is
+`track_correction` in `pathbot_description/urdf/robot.gazebo.xacro`
+(currently **1.91**, i.e. an effective track of 1.34 m vs the geometric 0.70 m).
+
+To re-measure it, launch the sim, then compare `/odom` yaw against Gazebo truth
+over a rotation short enough not to wrap past ±π:
+
+```bash
+# truth
+gz model -m robo_robot -p
+# odom (quaternion; yaw = 2*atan2(qz, qw))
+ros2 topic echo /odom --field pose.pose.orientation --once
+
+timeout 4 ros2 topic pub -r 50 /cmd_vel geometry_msgs/msg/Twist "{angular: {z: 0.3}}"
+```
+
+Then `track_correction_new = track_correction_old × (Δyaw_odom / Δyaw_truth)`.
+Rebuild, and repeat until the ratio is within ~5% of 1.0. Measure each
+direction from a **fresh** launch — running trials back-to-back contaminates
+the result. Re-calibrating invalidates any saved map; re-map afterwards.
+
+Current measured accuracy: rotation 1.7–2.1% error, straight line 2.7%.
 
 ## 5. Individual pieces (SLAM / Nav2 standalone)
 
@@ -100,7 +128,38 @@ ros2 launch pathbot_navigation nav2.launch.py            # AMCL
 ros2 launch pathbot_navigation nav2.launch.py slam:=True # no AMCL
 ```
 
-## 6. Checking AMCL
+## 6. Obstacle stopping (collision monitor)
+
+The robot only avoids obstacles **when Nav2 is driving it**. The nav2 velocity
+chain is:
+
+```
+controller_server -> /cmd_vel_nav -> velocity_smoother
+                  -> /cmd_vel_smoothed -> collision_monitor -> /cmd_vel -> wheels
+```
+
+`collision_monitor` watches `/scan_fixed` and gates that stream: a hard `stop`
+zone (a box ~0.35 m beyond the bumper) plus an `approach` zone that slows down.
+
+**Manual teleop is NOT protected.** `teleop_twist_keyboard` and
+`ros2 topic pub /cmd_vel` publish directly onto `/cmd_vel`, which is the
+*output* of the chain — they bypass the monitor entirely and will happily drive
+into a wall. To get gating while driving by hand, publish to the chain's input
+instead:
+
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard \
+  --ros-args -r /cmd_vel:=/cmd_vel_smoothed
+```
+
+Watch it working:
+
+```bash
+ros2 topic echo /collision_monitor_state
+ros2 topic echo /collision_monitor_stop_zone   # visualize in RViz
+```
+
+## 7. Checking AMCL
 
 ```bash
 ros2 lifecycle get /amcl          # active [3]
@@ -113,7 +172,7 @@ AMCL auto-seeds its initial pose at `(0, 0)` (the robot's spawn point, set via
 `set_initial_pose` in `nav2_params.yaml`). To re-seed it manually, use RViz's
 **2D Pose Estimate** button.
 
-## 7. Path following (Pure Pursuit)
+## 8. Path following (Pure Pursuit)
 
 ```bash
 ros2 launch pathbot_control path_follower.launch.py
@@ -125,25 +184,25 @@ With custom params:
 ros2 launch pathbot_control path_follower.launch.py lookahead_dist:=1.5 max_speed:=0.3
 ```
 
-## 8. RViz visualization
+## 9. RViz visualization
 
 ```bash
 ros2 launch pathbot_description rviz.launch.py
 ```
 
-## 9. Spawn robot directly (into an already-running world)
+## 10. Spawn robot directly (into an already-running world)
 
 ```bash
 ros2 launch pathbot_simulation spawn_in_track.launch.py
 ```
 
-## 10. Manual teleop / testing
+## 11. Manual teleop / testing
 
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
-## 11. Inspecting topics / nodes while running
+## 12. Inspecting topics / nodes while running
 
 ```bash
 ros2 topic list
@@ -154,13 +213,13 @@ ros2 node list
 ros2 run rqt_graph rqt_graph
 ```
 
-## 12. Publish a path manually (for testing pure pursuit)
+## 13. Publish a path manually (for testing pure pursuit)
 
 ```bash
 ros2 run pathbot_control publish_path.py
 ```
 
-## 13. Process management (PIDs)
+## 14. Process management (PIDs)
 
 Find PIDs for running ROS/Gazebo processes:
 

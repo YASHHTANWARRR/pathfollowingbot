@@ -3,6 +3,13 @@
 
 <xacro:include filename ="$(find pathbot_description)/urdf/robot.xacro"/>
 
+<!-- Skid-steer scrub correction for the DiffDrive odometry. The four fixed
+     wheels scrub sideways when turning, so the effective track is wider than
+     the geometric 2*s4 = 0.70 m. Measured against Gazebo ground truth: odom
+     over-reported yaw by ~2.1x at 1.0, then under-reported by 9% at 2.10.
+     Converged value below; see the calibration procedure in COMMANDS.md. -->
+<xacro:property name="track_correction" value="1.91"/>
+
 <!-- <gazebo>
     <model>
         <canonical_link>body_link</canonical_link>
@@ -31,8 +38,8 @@
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
     <material>Gazebo/Yellow</material>
-</gazebo
->
+</gazebo>
+
 <gazebo reference = "wheel4_link">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
@@ -48,24 +55,30 @@
 <gazebo>
     <plugin filename = "libgz-sim-diff-drive-system.so" name="gz::sim::systems::DiffDrive">
 
-        <left_joint>wheel1_joint</left_joint>
-        <left_joint>wheel3_joint</left_joint>
+        <!-- +y is LEFT (REP-103). wheel2/wheel4 sit at y=+s4, wheel1/wheel3 at
+             y=-s4. Getting this backwards inverts the sign of odometry yaw and
+             destroys SLAM on every turn. -->
+        <left_joint>wheel2_joint</left_joint>
+        <left_joint>wheel4_joint</left_joint>
 
-        <right_joint>wheel2_joint</right_joint>
-        <right_joint>wheel4_joint</right_joint>
+        <right_joint>wheel1_joint</right_joint>
+        <right_joint>wheel3_joint</right_joint>
 
-        <wheel_separation>${2*s4}</wheel_separation>
+        <!-- 4-wheel skid-steer: the wheels scrub sideways when turning, so the
+             effective track is wider than the geometric 2*s4. Calibrated
+             against Gazebo ground truth - see COMMANDS.md. -->
+        <wheel_separation>${2*s4*track_correction}</wheel_separation>
         <wheel_radius>${radius}</wheel_radius>
-
-        <max_wheel_torque>150</max_wheel_torque>
-        <max_wheel_acceleration>20.0</max_wheel_acceleration>
 
         <topic>/cmd_vel</topic>
         <tf_topic>/tf</tf_topic>
         <odom_topic>/odom</odom_topic>
+        <!-- Required. Without it the odom frame becomes "robo_robot/odom",
+             which breaks the odom->body_footprint TF chain and makes
+             slam_toolbox drop every scan ("queue is full"). -->
         <frame_id>odom</frame_id>
         <child_frame_id>body_footprint</child_frame_id>
-        <odom_publisher_frequency>30</odom_publisher_frequency>
+        <odom_publish_frequency>30</odom_publish_frequency>
     </plugin>
 
     <plugin filename="libgz-sim-joint-state-publisher-system.so" name="gz::sim::systems::JointStatePublisher">
