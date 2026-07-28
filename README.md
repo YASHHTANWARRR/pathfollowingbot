@@ -336,13 +336,26 @@ ros2 launch pathbot_navigation map_saver.launch.py
 
 ---
 
-# 🧭 Navigation2
+# 🧭 Navigation2 & AMCL
 
-After generating the map, launch Navigation2.
+`bringup.launch.py` runs **either** slam_toolbox **or** AMCL — never both, since
+they would fight over the `map -> odom` transform.
 
 ```bash
-ros2 launch pathbot_navigation nav2.launch.py
+# AMCL localization against the saved map (default)
+ros2 launch pathbot_bringup bringup.launch.py
+
+# SLAM mapping instead
+ros2 launch pathbot_bringup bringup.launch.py slam:=True
+
+# a different map
+ros2 launch pathbot_bringup bringup.launch.py map:=/abs/path/other.yaml
 ```
+
+`slam:=True`/`False` must be capitalized — nav2_bringup evaluates it as a Python
+expression. AMCL auto-seeds its pose at the spawn point `(0, 0)` via
+`set_initial_pose` in `nav2_params.yaml`; re-seed any time with RViz's
+**2D Pose Estimate**.
 
 Features
 

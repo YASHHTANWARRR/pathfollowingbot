@@ -53,25 +53,67 @@ Or the full bringup (Gazebo + SLAM + Nav2 + RViz, see [bringup.launch.py](src/pa
 ros2 launch pathbot_bringup bringup.launch.py
 ```
 
-## 3. SLAM (build a map)
+## 3. Two bringup modes: mapping vs localization
+
+`bringup.launch.py` runs **either** slam_toolbox **or** AMCL — never both, since
+they would fight over the `map -> odom` transform.
+
+| Mode | Command | What runs |
+|------|---------|-----------|
+| AMCL localization (**default**) | `ros2 launch pathbot_bringup bringup.launch.py` | `map_server` + `amcl` against the saved map |
+| SLAM mapping | `ros2 launch pathbot_bringup bringup.launch.py slam:=True` | `slam_toolbox` building a new map |
+
+Use a different map:
+
+```bash
+ros2 launch pathbot_bringup bringup.launch.py map:=/absolute/path/to/other.yaml
+```
+
+> `slam:=True` / `slam:=False` must be **capitalized** — nav2_bringup evaluates
+> it as a Python expression, so `true` raises `NameError: name 'true' is not defined`.
+
+## 4. Making a new map
+
+```bash
+# 1. mapping mode
+ros2 launch pathbot_bringup bringup.launch.py slam:=True
+
+# 2. drive around (second terminal)
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+# 3. save it (third terminal, while step 1 still runs)
+ros2 run nav2_map_server map_saver_cli \
+  -f ~/Desktop/pathfollowingbot/src/pathbot_navigation/maps/warehouse
+
+# 4. rebuild so the map installs into share/
+colcon build --packages-select pathbot_navigation && source install/setup.bash
+```
+
+Drive **slowly and revisit places** — map quality directly determines how well
+AMCL localizes afterwards.
+
+## 5. Individual pieces (SLAM / Nav2 standalone)
 
 ```bash
 ros2 launch pathbot_navigation slam.launch.py
+ros2 launch pathbot_navigation nav2.launch.py            # AMCL
+ros2 launch pathbot_navigation nav2.launch.py slam:=True # no AMCL
 ```
 
-Save the map once SLAM has mapped enough of the world:
+## 6. Checking AMCL
 
 ```bash
-ros2 launch pathbot_navigation map_saver.launch.py
+ros2 lifecycle get /amcl          # active [3]
+ros2 lifecycle get /map_server    # active [3]
+ros2 topic echo /amcl_pose --once
+ros2 run tf2_ros tf2_echo map odom
 ```
 
-## 4. Navigation (Nav2)
+AMCL auto-seeds its initial pose at `(0, 0)` (the robot's spawn point, set via
+`set_initial_pose` in `nav2_params.yaml`). To re-seed it manually, use RViz's
+**2D Pose Estimate** button.
 
-```bash
-ros2 launch pathbot_navigation nav2.launch.py
-```
-
-## 5. Path following (Pure Pursuit)
+## 7. Path following (Pure Pursuit)
 
 ```bash
 ros2 launch pathbot_control path_follower.launch.py
@@ -83,25 +125,25 @@ With custom params:
 ros2 launch pathbot_control path_follower.launch.py lookahead_dist:=1.5 max_speed:=0.3
 ```
 
-## 6. RViz visualization
+## 8. RViz visualization
 
 ```bash
 ros2 launch pathbot_description rviz.launch.py
 ```
 
-## 7. Spawn robot directly on the track (no warehouse world)
+## 9. Spawn robot directly (into an already-running world)
 
 ```bash
 ros2 launch pathbot_simulation spawn_in_track.launch.py
 ```
 
-## 8. Manual teleop / testing
+## 10. Manual teleop / testing
 
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
-## 9. Inspecting topics / nodes while running
+## 11. Inspecting topics / nodes while running
 
 ```bash
 ros2 topic list
@@ -112,13 +154,13 @@ ros2 node list
 ros2 run rqt_graph rqt_graph
 ```
 
-## 10. Publish a path manually (for testing pure pursuit)
+## 12. Publish a path manually (for testing pure pursuit)
 
 ```bash
 ros2 run pathbot_control publish_path.py
 ```
 
-## 11. Process management (PIDs)
+## 13. Process management (PIDs)
 
 Find PIDs for running ROS/Gazebo processes:
 
@@ -157,21 +199,22 @@ Check what's holding a port (e.g. if Gazebo won't start because a previous insta
 lsof -i :11345
 ```
 
-## Typical test session (SLAM -> map -> nav)
+## Typical test session (map -> save -> localize)
 
 ```bash
-# terminal 1
-ros2 launch pathbot_simulation gazebo_model.launch.py
+# --- terminal 1: map the world ---
+ros2 launch pathbot_bringup bringup.launch.py slam:=True
 
-# terminal 2
-ros2 launch pathbot_navigation slam.launch.py
+# --- terminal 2: drive around slowly, revisiting places ---
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
-# terminal 3
-ros2 launch pathbot_description rviz.launch.py
+# --- terminal 3: save the map, then rebuild ---
+ros2 run nav2_map_server map_saver_cli \
+  -f ~/Desktop/pathfollowingbot/src/pathbot_navigation/maps/warehouse
+colcon build --packages-select pathbot_navigation && source install/setup.bash
 
-# drive around manually, then save the map
-ros2 launch pathbot_navigation map_saver.launch.py
+# --- stop terminal 1, then relaunch in AMCL mode (the default) ---
+ros2 launch pathbot_bringup bringup.launch.py
 
-# terminal 4 (after map saved, restart without SLAM)
-ros2 launch pathbot_navigation nav2.launch.py
+# --- send a navigation goal from RViz with "2D Goal Pose" ---
 ```

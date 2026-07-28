@@ -38,6 +38,17 @@ amcl:
     z_short: 0.05
     scan_topic: /scan_fixed
 
+    # Start localized at the robot's Gazebo spawn point so AMCL converges
+    # without a manual 2D Pose Estimate. Override any time from RViz's
+    # "2D Pose Estimate" tool. Keep in sync with the -x/-y spawn arguments
+    # in pathbot_simulation/launch/gazebo_model.launch.py.
+    set_initial_pose: true
+    initial_pose:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      yaw: 0.0
+
 bt_navigator:
   ros__parameters:
     global_frame: map
