@@ -1,7 +1,5 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/scan_frame_corrector
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/path_planner.py
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/image_to_world.py
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/track_to_walls.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/pure_pursuit.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/lib/mobile_robot/publish_path.py
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/launch/bringup.launch.py
@@ -1940,7 +1938,6 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/worlds/log/latest_build/events.log
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/worlds/log/latest_build/logger_all.log
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/worlds/small_warehouse.world
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/worlds/track_walls.sdf
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/aws_robomaker_warehouse_Bucket_01/materials/textures/aws_robomaker_warehouse_Bucket_01.png
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/aws_robomaker_warehouse_Bucket_01/meshes/aws_robomaker_warehouse_Bucket_01_collision.DAE
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/aws_robomaker_warehouse_Bucket_01/meshes/aws_robomaker_warehouse_Bucket_01_visual.DAE
@@ -2029,14 +2026,9 @@
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/aws_robomaker_warehouse_WallB_01/meshes/aws_robomaker_warehouse_WallB_01_visual.DAE
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/aws_robomaker_warehouse_WallB_01/model.config
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/aws_robomaker_warehouse_WallB_01/model.sdf
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/track_walls/model.config
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/models/track_walls/model.sdf
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/config/nav2_map.rviz
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/config/nav2_params.yaml
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/config/slam_toolbox.yaml
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/maps/pasted_image.png
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/maps/test_track.png
-/home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/maps/test_track.yaml
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/rviz/slam.rviz
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/mobile_robot/docs/PURE_PURSUIT.md
 /home/hornet/Desktop/pathfollowingbot/install/mobile_robot/share/ament_index/resource_index/package_run_dependencies/mobile_robot
